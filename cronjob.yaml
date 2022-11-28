@@ -1,0 +1,31 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  creationTimestamp: null
+  labels:
+    run: kplabs-jon
+  name: kplabs-jon
+spec:
+  concurrencyPolicy: Allow
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+    spec:
+      completions: 5
+      template:
+        metadata:
+          creationTimestamp: null
+          labels:
+            run: kplabs-jon
+        spec:
+          containers:
+          - args:
+            - sh
+            - -c
+            - date
+            image: busybox
+            name: kplabs-jon
+            resources: {}
+          restartPolicy: OnFailure
+  schedule: 0/1 * * * *
+status: {}

@@ -1,0 +1,31 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  creationTimestamp: null
+  labels:
+    run: kplabs-cron
+  name: kplabs-cron
+spec:
+  concurrencyPolicy: Allow
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+    spec:
+      activeDeadlineSeconds: 10
+      template:
+        metadata:
+          creationTimestamp: null
+          labels:
+            run: kplabs-cron
+        spec:
+          containers:
+          - args:
+            - sh
+            - -c
+            - curl kplabs.in/ping
+            image: busybox
+            name: kplabs-cron
+            resources: {}
+          restartPolicy: OnFailure
+  schedule: 0/1 * * * *
+status: {}

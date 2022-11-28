@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2020-01-10T03:30:24Z"
+  labels:
+    run: nginx
+  name: nginx
+  namespace: default
+  resourceVersion: "803291"
+  selfLink: /api/v1/namespaces/default/pods/nginx
+  uid: 5be37043-a87d-4971-98bf-64233222ac84
+spec:
+  containers:
+  - image: nginx
+    imagePullPolicy: Always
+    name: nginx
+    env:
+      - name: options
+        valueFrom:
+          configMapKeyRef:
+             name: option
+             key: val5 
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-t5bzg
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  priority: 0
+  restartPolicy: Never
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: default-token-t5bzg
+    secret:
+      defaultMode: 420
+      secretName: default-token-t5bzg
+status:
+  phase: Pending
+  qosClass: BestEffort
