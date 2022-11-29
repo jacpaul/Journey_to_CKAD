@@ -1,2 +1,2 @@
 # Journey_to_CKAD
-These are some of examples which I practised as a part of the Kubernetes certification program. The latest CKAD includes Helm chart as well
+These are some of examples which I practised as a part of the Kubernetes certification program. 
